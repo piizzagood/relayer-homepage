@@ -97,6 +97,15 @@ section{padding-block:clamp(72px,10vw,120px)}
 /* 폰 전용 줄바꿈 도우미: 데스크톱에서는 m-br 숨김, m-line은 이어서 */
 .m-br{display:none}
 .word b{display:inline-block;width:2.55em;flex:none}
+@media (max-width:700px){
+  .src{font-size:11px;line-height:1.7}
+  html[lang="en"] .stat .lead br,html[lang="en"] .name .lead br{display:none}
+  html[lang="en"] .stat .lead b{display:block}
+  html[lang="en"] .src{font-size:10px}
+  .home-cta .cta{flex-wrap:nowrap;gap:8px}
+  .home-cta .btn{font-size:13px;padding:10px 14px;gap:6px;white-space:nowrap}
+  .home-cta .btn .bi{width:15px;height:15px;margin-left:-2px}
+}
 @media (max-width:700px){.m-br{display:inline}.m-sep{display:none}.m-line{display:block}.hero .lead br{display:none}}
 /* 브랜드 이야기 끝의 버튼 */
 .name{padding-bottom:clamp(40px,6vw,64px)}
@@ -471,12 +480,12 @@ footer a:hover{color:var(--on-dark)}
     m_brand:'Brand', m_products:'Products', m_how:'How we make it', m_news:'News', m_notify:'Get notified',
     h_title:'Discarded clothes <br>become the next thing.',
     h_lead:'Relayer is a Seoul-based circular materials brand that turns discarded clothing into boards. <br>We use those boards to make furniture and build spaces.',
-    h_cta1:'Notify me when funding opens', h_cta2:'Instagram @relayer.seoul',
+    h_cta1:'Notify me at launch', h_cta2:'Instagram @relayer.seoul',
     s_k:'Why we started', s_mega:'800<span>k tons</span>',
-    s_lead:'That is how much clothing and textile waste Korea threw away in 2023.<br>More than half goes out with general trash, and <b>only 12.6% is recycled in Korea.</b>',
+    s_lead:'Korea&rsquo;s clothing and textile waste in 2023. <br>Over half goes into general trash. <b>Only 12.6% is recycled here.</b>',
     s_src:'Korea Environment Institute, “Establishing a Clothing Waste Recycling System in Korea”<br class="m-br">(2025) · 2023 clothing and textile waste',
     b_title:'Clothes worn once,<br><em>layered again.</em>',
-    b_lead:'A garment is fibers gathered layer upon layer.<br>Unravel discarded clothes and stack them again, and they become a solid board.<br>So the next object can begin where a garment ended,<br>we pass it on — like a relay.',
+    b_lead:'A garment is fibers, layer upon layer. <br>We unravel discarded clothes and stack them again <br>into solid boards — passing the baton, like a relay.',
     b_re:'again', b_layer:'a layer, a ply', b_relay:'to pass on',
     p_title:'Light enough for furniture,<br>solid enough for buildings.',
     p1_tag:'Crowdfunding planned for 2027', p1_h:'Furniture / Pop-up walls',
