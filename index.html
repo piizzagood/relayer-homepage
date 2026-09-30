@@ -94,6 +94,10 @@ section{padding-block:clamp(72px,10vw,120px)}
 @media (prefers-reduced-motion:reduce){.obj svg{animation:none}.draw *{animation:none;stroke-dashoffset:0}.draw .dash{opacity:1}}
 .hero-copy{position:relative;z-index:3;margin-top:clamp(28px,4vw,52px);display:flex;flex-wrap:wrap;gap:24px 48px;align-items:flex-end;justify-content:space-between}
 .hero-copy > div:first-child{padding-left:2%}
+/* 폰 전용 줄바꿈 도우미: 데스크톱에서는 m-br 숨김, m-line은 이어서 */
+.m-br{display:none}
+.word b{display:inline-block;width:2.55em;flex:none}
+@media (max-width:700px){.m-br{display:inline}.m-sep{display:none}.m-line{display:block}.hero .lead br{display:none}}
 /* 브랜드 이야기 끝의 버튼 */
 .name{padding-bottom:clamp(40px,6vw,64px)}
 .home-cta{padding-block:0 clamp(80px,11vw,130px)}
@@ -102,9 +106,19 @@ section{padding-block:clamp(72px,10vw,120px)}
 @media (min-width:900px){.hero h1 br{display:none}}
 /* 모바일: 그림을 큰 글자 아래 한 줄 모음으로 */
 @media (max-width:700px){
-  .objs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 20px;align-items:end;margin-top:28px;padding-inline:4px}
+  .objs{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 18px;align-items:center;justify-items:center;margin-top:34px;padding-inline:4px}
   .objs .obj{position:static;width:auto!important}
-  .objs .obj.m-hide{display:none}
+  /* 6개 그림을 크기·높낮이·기울기만 조금씩 다르게 — 칸 안에서만 움직여 겹치지 않음 */
+  .objs .obj:nth-child(1){width:92%!important;transform:translateY(14px) rotate(-7deg)}
+  .objs .obj:nth-child(2){width:62%!important;transform:translateY(-8px) rotate(5deg)}
+  .objs .obj:nth-child(3){width:78%!important;transform:translateY(22px) rotate(-4deg)}
+  .objs .obj:nth-child(6){width:80%!important;transform:translateY(-4px) rotate(3deg)}
+  .objs .obj:nth-child(7){width:96%!important;transform:translateY(18px) rotate(-3deg)}
+  .objs .obj:nth-child(8){width:84%!important;transform:translateY(-10px) rotate(4deg)}
+  /* 섬유 뭉치·단추는 큰 글자 옆 빈자리로 (INTO 오른쪽, BOARDS 오른쪽) */
+  .objs .obj.m-side{position:absolute}
+  .objs .obj.m-pile{left:68%!important;top:44px!important;width:22%!important}
+  .objs .obj.m-small{left:82%!important;top:162px!important;width:9%!important}
 }
 .hero-wm{display:block;height:clamp(52px,7.5vw,88px);width:auto;margin:0 0 18px calc(clamp(52px,7.5vw,88px) * -.22)}
 .hero h1{font-size:clamp(28px,3.4vw,42px);line-height:1.28}
@@ -170,7 +184,7 @@ section{padding-block:clamp(72px,10vw,120px)}
 .timeline .what{font-size:clamp(17px,1.9vw,20px);font-weight:600}
 .timeline .st{font-size:14px;font-weight:600;color:var(--ink-3)}
 .timeline li.done .when,.timeline li.done .st{color:var(--blue)}
-@media (max-width:640px){.timeline li{grid-template-columns:1fr;gap:4px}}
+@media (max-width:640px){.timeline li{grid-template-columns:1fr auto;gap:4px 20px}.timeline .when{grid-column:1 / -1}.timeline .st{text-align:right;white-space:nowrap}}
 
 /* 협업 */
 .collab{border-top:1px solid var(--line)}
@@ -270,12 +284,12 @@ footer a:hover{color:var(--on-dark)}
   </svg></div>
 
   <!-- 분쇄 섬유 뭉치 (공 모양) -->
-  <div class="obj m-hide" style="left:63.2%;top:35%;width:10%;--d:5.5s;--r0:-6deg;--r1:6deg;--y:-8px"><svg class="draw" viewBox="0 0 200 200" style="--dl:.85s">
+  <div class="obj m-side m-pile" style="left:63.2%;top:35%;width:10%;--d:5.5s;--r0:-6deg;--r1:6deg;--y:-8px"><svg class="draw" viewBox="0 0 200 200" style="--dl:.85s">
     <g id="pile"></g>
   </svg></div>
 
   <!-- 단추 -->
-  <div class="obj m-hide" style="left:91%;top:42%;width:4%;--d:4.5s;--r0:-18deg;--r1:12deg;--y:-12px"><svg class="draw" viewBox="0 0 60 60" style="--dl:1.1s">
+  <div class="obj m-side m-small" style="left:91%;top:42%;width:4%;--d:4.5s;--r0:-18deg;--r1:12deg;--y:-12px"><svg class="draw" viewBox="0 0 60 60" style="--dl:1.1s">
     <circle cx="30" cy="30" r="26"/><circle class="nf" cx="30" cy="30" r="18"/>
     <circle cx="24" cy="24" r="3"/><circle cx="36" cy="24" r="3"/><circle cx="24" cy="36" r="3"/><circle cx="36" cy="36" r="3"/>
   </svg></div>
@@ -322,7 +336,7 @@ footer a:hover{color:var(--on-dark)}
     <div>
       <svg class="hero-wm" role="img" aria-label="Relayer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 835 335"><path transform="translate(72.90,218.70)" d="M135.4 0.0V-5.4C130.8 -8.0 129.0 -11.0 129.0 -17.400000000000002C128.20000000000002 -60.400000000000006 127.4 -62.400000000000006 108.80000000000001 -70.4C125.2 -76.80000000000001 133.4 -88.60000000000001 133.4 -106.4C133.4 -129.0 120.0 -145.8 94.2 -145.8H16.0V0.0H46.0V-57.800000000000004H80.4C93.4 -57.800000000000004 99.0 -52.6 99.0 -40.400000000000006L98.60000000000001 -25.0C98.60000000000001 -11.4 99.4 -7.0 103.2 0.0ZM103.4 -102.2C103.4 -89.2 99.2 -82.80000000000001 82.2 -82.80000000000001H46.0V-120.80000000000001H82.2C98.60000000000001 -120.80000000000001 103.4 -114.80000000000001 103.4 -102.2ZM243.8 -50.0C243.8 -87.2 225.0 -109.80000000000001 193.20000000000002 -109.80000000000001C162.20000000000002 -109.80000000000001 143.20000000000002 -88.80000000000001 143.20000000000002 -52.6C143.20000000000002 -18.0 162.0 1.8 192.60000000000002 1.8C216.8 1.8 236.40000000000003 -9.200000000000001 242.60000000000002 -30.400000000000002H215.0C212.60000000000002 -22.6 203.8 -19.6 193.60000000000002 -19.6C180.4 -19.6 172.0 -25.6 171.20000000000002 -46.6H243.60000000000002ZM214.60000000000002 -65.2H171.60000000000002C173.4 -80.2 180.4 -88.4 192.8 -88.4C204.8 -88.4 213.20000000000002 -80.60000000000001 214.60000000000002 -65.2ZM285.80000000000007 0.0V-145.8H257.8V0.0ZM399.20000000000005 0.0V-3.4000000000000004C394.20000000000005 -8.0 392.80000000000007 -11.0 392.80000000000007 -16.6V-76.60000000000001C392.80000000000007 -98.60000000000001 377.80000000000007 -109.80000000000001 348.6 -109.80000000000001C319.40000000000003 -109.80000000000001 304.20000000000005 -97.4 302.40000000000003 -72.4H329.40000000000003C330.8 -83.60000000000001 335.40000000000003 -87.2 349.20000000000005 -87.2C360.00000000000006 -87.2 365.40000000000003 -83.60000000000001 365.40000000000003 -76.4C365.40000000000003 -65.0 357.00000000000006 -66.2 343.00000000000006 -63.800000000000004L331.8 -61.800000000000004C310.40000000000003 -58.0 300.00000000000006 -48.800000000000004 300.00000000000006 -29.200000000000003C300.00000000000006 -8.200000000000001 314.8 1.8 332.80000000000007 1.8C344.80000000000007 1.8 355.80000000000007 -3.4000000000000004 365.6 -13.600000000000001C365.6 -8.0 366.20000000000005 -3.2 368.80000000000007 0.0ZM365.40000000000003 -46.2C365.40000000000003 -30.0 357.40000000000003 -20.8 343.20000000000005 -20.8C333.80000000000007 -20.8 328.00000000000006 -24.400000000000002 328.00000000000006 -32.4C328.00000000000006 -40.6 332.40000000000003 -43.6 344.00000000000006 -45.800000000000004L353.6 -47.6C361.00000000000006 -49.0 362.20000000000005 -49.400000000000006 365.40000000000003 -51.0ZM507.6000000000001 -108.0H478.80000000000007L456.4000000000001 -29.400000000000002L432.6000000000001 -108.0H401.80000000000007L442.00000000000006 4.6000000000000005V5.2C442.00000000000006 15.4 434.40000000000003 23.200000000000003 424.6000000000001 23.200000000000003C422.40000000000003 23.200000000000003 420.80000000000007 23.0 417.20000000000005 22.0V43.0C421.40000000000003 43.6 423.80000000000007 43.800000000000004 427.20000000000005 43.800000000000004C446.00000000000006 43.800000000000004 455.80000000000007 40.400000000000006 463.20000000000005 19.8ZM610.6000000000001 -50.0C610.6000000000001 -87.2 591.8000000000001 -109.80000000000001 560.0000000000001 -109.80000000000001C529.0000000000001 -109.80000000000001 510.00000000000006 -88.80000000000001 510.00000000000006 -52.6C510.00000000000006 -18.0 528.8000000000001 1.8 559.4000000000001 1.8C583.6000000000001 1.8 603.2 -9.200000000000001 609.4000000000001 -30.400000000000002H581.8000000000001C579.4000000000001 -22.6 570.6000000000001 -19.6 560.4000000000001 -19.6C547.2 -19.6 538.8000000000001 -25.6 538.0000000000001 -46.6H610.4000000000001ZM581.4000000000001 -65.2H538.4000000000001C540.2 -80.2 547.2 -88.4 559.6000000000001 -88.4C571.6000000000001 -88.4 580.0000000000001 -80.60000000000001 581.4000000000001 -65.2ZM685.2 -81.2V-109.60000000000001C683.6 -109.80000000000001 682.6 -109.80000000000001 681.8000000000001 -109.80000000000001C669.0 -109.80000000000001 657.8000000000001 -101.4 651.8000000000001 -86.80000000000001V-108.0H623.8000000000001V0.0H651.8000000000001V-57.400000000000006C651.8000000000001 -73.8 660.0 -82.0 676.4000000000001 -82.0C679.4000000000001 -82.0 681.4000000000001 -81.80000000000001 685.2 -81.2Z" fill="#111418"/></svg>
       <h1 data-i18n="h_title">버려진 옷은, <br>다음 물건이 됩니다.</h1>
-      <p class="lead" data-i18n="h_lead">Relayer는 버려진 옷을 판재로 되살리는 서울의 자원순환 소재 브랜드입니다.<br>그 판재로 가구를 만들고, 공간을 짓습니다.</p>
+      <p class="lead" data-i18n="h_lead">Relayer는 버려진 옷을 판재로 되살리는 서울의 자원순환 소재 브랜드입니다. <br>그 판재로 가구를 만들고, 공간을 짓습니다.</p>
     </div>
   </div>
 </header>
@@ -333,7 +347,7 @@ footer a:hover{color:var(--on-dark)}
     <div class="kicker" id="stat-t" data-i18n="s_k">왜 시작했나</div>
     <div class="mega" data-i18n="s_mega">80<span>만 톤</span></div>
     <p class="lead" data-i18n="s_lead">2023년 한 해 동안 국내에서 버려진 옷과 섬유의 양입니다.<br>절반 넘게 일반 쓰레기로 버려지고, <b>국내에서 재활용되는 건 12.6%뿐입니다.</b></p>
-    <p class="src" data-i18n="s_src">한국환경연구원, 「폐의류의 국내 재활용 체계 구축 방안 연구」(정책보고서 2025-01) · 2023년 기준 폐의류·폐섬유류 발생량</p>
+    <p class="src" data-i18n="s_src">한국환경연구원, 「폐의류의 국내 재활용 체계 구축 방안 연구」<br class="m-br">(정책보고서 2025-01) · 2023년 기준 폐의류·폐섬유류 발생량</p>
   </div>
 </section>
 
@@ -393,7 +407,7 @@ footer a:hover{color:var(--on-dark)}
       <div class="step"><div class="n">3</div><h3 data-i18n="w3_h">성형</h3><p data-i18n="w3_p">열과 압력, 또는 결합재로 섬유를 한 장의 판으로 굳힙니다.</p></div>
       <div class="step"><div class="n">4</div><h3 data-i18n="w4_h">시험</h3><p data-i18n="w4_p">강도·무게·안전성을 공인 시험기관에서 확인합니다.</p></div>
     </div>
-    <p class="promise" data-i18n="w_promise"><b>약속 하나.</b> 공인 시험성적서로 확인한 소재만 제품으로 내놓습니다.</p>
+    <p class="promise" data-i18n="w_promise"><b>약속 하나.</b><br class="m-br"> 공인 시험성적서로 확인한 소재만 제품으로 내놓습니다.</p>
   </div>
 </section>
 
@@ -456,11 +470,11 @@ footer a:hover{color:var(--on-dark)}
     nav:'Main menu',
     m_brand:'Brand', m_products:'Products', m_how:'How we make it', m_news:'News', m_notify:'Get notified',
     h_title:'Discarded clothes <br>become the next thing.',
-    h_lead:'Relayer is a Seoul-based circular materials brand that turns discarded clothing into boards.<br>We use those boards to make furniture and build spaces.',
+    h_lead:'Relayer is a Seoul-based circular materials brand that turns discarded clothing into boards. <br>We use those boards to make furniture and build spaces.',
     h_cta1:'Notify me when funding opens', h_cta2:'Instagram @relayer.seoul',
     s_k:'Why we started', s_mega:'800<span>k tons</span>',
     s_lead:'That is how much clothing and textile waste Korea threw away in 2023.<br>More than half goes out with general trash, and <b>only 12.6% is recycled in Korea.</b>',
-    s_src:'Korea Environment Institute, “Establishing a Clothing Waste Recycling System in Korea” (2025) · 2023 clothing and textile waste',
+    s_src:'Korea Environment Institute, “Establishing a Clothing Waste Recycling System in Korea”<br class="m-br">(2025) · 2023 clothing and textile waste',
     b_title:'Clothes worn once,<br><em>layered again.</em>',
     b_lead:'A garment is fibers gathered layer upon layer.<br>Unravel discarded clothes and stack them again, and they become a solid board.<br>So the next object can begin where a garment ended,<br>we pass it on — like a relay.',
     b_re:'again', b_layer:'a layer, a ply', b_relay:'to pass on',
@@ -476,7 +490,7 @@ footer a:hover{color:var(--on-dark)}
     w2_h:'Shred', w2_p:'We remove buttons, zippers and other parts, then break the fabric into fine fibers.',
     w3_h:'Form', w3_p:'Heat and pressure, or a binder, set the fibers into a single board.',
     w4_h:'Test', w4_p:'Strength, weight and safety are verified by accredited testing labs.',
-    w_promise:'<b>One promise.</b> We only release materials verified by official test reports.',
+    w_promise:'<b>One promise.</b><br class="m-br"> We only release materials verified by official test reports.',
     n_title:'Here’s where we are.',
     n1:'Relayer brand launched', n2:'Material mix trials and test report preparation',
     n3_w:'H1 2027', n3:'Crowdfunding in Korea', n4_w:'H2 2027', n4:'Panel collaborations for exhibitions and pop-up spaces',
