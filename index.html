@@ -22,7 +22,7 @@
   --wrap:1080px; color-scheme:light;
 }
 *{box-sizing:border-box}
-html{scroll-padding-top:84px}
+html{scroll-padding-top:84px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:17px;font-weight:400;line-height:1.8;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:clip}
 img,svg{max-width:100%}
 a{color:inherit}
@@ -96,12 +96,13 @@ section{padding-block:clamp(72px,10vw,120px)}
 .hero-copy > div:first-child{padding-left:2%}
 /* 폰 전용 줄바꿈 도우미: 데스크톱에서는 m-br 숨김, m-line은 이어서 */
 .m-br{display:none}
+.name .lead br.keep{display:none}
 .word b{display:inline-block;width:2.55em;flex:none}
 @media (max-width:700px){
-  .src{font-size:11px;line-height:1.7}
-  html[lang="en"] .stat .lead br,html[lang="en"] .name .lead br{display:none}
-  html[lang="en"] .stat .lead b{display:block}
-  html[lang="en"] .src{font-size:10px}
+  .src{font-size:10px;line-height:1.7}
+  html[lang="en"] .stat .lead br,html[lang="en"] .name .lead br:not(.keep){display:none}
+  html[lang="en"] .name .lead br.keep{display:inline}
+  html[lang="en"] .stat .lead b{white-space:normal}
   .home-cta .cta{flex-wrap:nowrap;gap:8px}
   .home-cta .btn{font-size:13px;padding:10px 14px;gap:6px;white-space:nowrap}
   .home-cta .btn .bi{width:15px;height:15px;margin-left:-2px}
@@ -483,9 +484,9 @@ footer a:hover{color:var(--on-dark)}
     h_cta1:'Notify me at launch', h_cta2:'Instagram @relayer.seoul',
     s_k:'Why we started', s_mega:'800<span>k tons</span>',
     s_lead:'Korea&rsquo;s clothing and textile waste in 2023. <br>Over half goes into general trash. <b>Only 12.6% is recycled here.</b>',
-    s_src:'Korea Environment Institute, “Establishing a Clothing Waste Recycling System in Korea”<br class="m-br">(2025) · 2023 clothing and textile waste',
+    s_src:'Korea Environment Institute, “Establishing a Clothing Waste Recycling System in Korea” <br class="m-br">(2025) · 2023 clothing and textile waste',
     b_title:'Clothes worn once,<br><em>layered again.</em>',
-    b_lead:'A garment is fibers, layer upon layer. <br>We unravel discarded clothes and stack them again <br>into solid boards — passing the baton, like a relay.',
+    b_lead:'A garment is fibers, layer upon layer. <br>We unravel discarded clothes and stack them again <br>into solid boards, <br class="keep">passing the baton, like a relay.',
     b_re:'again', b_layer:'a layer, a ply', b_relay:'to pass on',
     p_title:'Light enough for furniture,<br>solid enough for buildings.',
     p1_tag:'Crowdfunding planned for 2027', p1_h:'Furniture / Pop-up walls',
